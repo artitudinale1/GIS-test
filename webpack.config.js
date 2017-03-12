@@ -18,13 +18,6 @@ module.exports = {
     module:{
       rules:[
 
-        {test: /\.json$/,
-        exclude: /node_modules/,
-        use: 'file-loader'},
-
-        {test: /\.(png|jpg)$/,
-         use: 'url-loader'},
-
         {test:/\.scss$/,
         use: ExtractTextPlugin.extract({
                 fallback: "style-loader",
