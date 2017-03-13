@@ -3,7 +3,10 @@
 
 Author: Alex Garulli
 
-`cd into GIS-test dir`
+
+`git clone https://github.com/artitudinale1/GIS-test.git`
+
+`cd GIS-test`
 
 `npm install`
 
