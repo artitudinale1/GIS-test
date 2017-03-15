@@ -96,6 +96,7 @@ var Thamesmead = (function () {
              google.maps.event.trigger(map, "resize");
              map.setCenter(center);
           });
+
           var markers = [];
           var bounds = new google.maps.LatLngBounds();
           obj.map(function(x){
@@ -127,13 +128,35 @@ var Thamesmead = (function () {
           var mapDiv = document.createElement('div');
           mapDiv.setAttribute('id', 'map');
           figure.appendChild(mapDiv);
+          var bounds = new google.maps.LatLngBounds();
           var places = [];
           data.geographic_extent.coordinates.map(function(o){
             o.map(function(c){
-                places.push(c)
+                places.push({
+                  'lat': c[1],
+                  'lng': c[0]
+                })
               })
           });
-        updateMap(places);
+          places.map(function(g){
+            bounds.extend(g);
+          })
+
+          var polygon1 = new google.maps.Polygon({
+          paths: places,
+          strokeColor: '#FF0000',
+          strokeOpacity: 0.8,
+          strokeWeight: 2,
+          fillColor: 'transparent',
+        });
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+         zoom: 14,
+        center: bounds.getCenter(),
+         mapTypeId: 'terrain'
+       });
+
+        polygon1.setMap(map);
           };
         return {
             init: init
